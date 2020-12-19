@@ -38,10 +38,6 @@ public class PlayerController : MonoBehaviour
             transform.localScale = new Vector3(playerDir, 1, 1);
             transform.position = transform.position + Vector3.right * Time.deltaTime * speed;
         }
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            // character does an action
-            print("character should do an action");
-        }
+
     }
 }
