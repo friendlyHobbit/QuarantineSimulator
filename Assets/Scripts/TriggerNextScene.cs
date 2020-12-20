@@ -24,28 +24,28 @@ public class TriggerNextScene : MonoBehaviour
     {
         if(sceneID == 0)
         {
-            // kitchen scene -> work scene
-            SceneManager.LoadScene(3);
+            // Bathroom scene -> kitchen scene
+            SceneManager.LoadScene(1);
         }
         else if (sceneID == 1)
         {
-            // bedroom scene -> bathroom
+            // kitchen scene -> work
             SceneManager.LoadScene(2);
         }
         else if (sceneID == 2)
         {
-            // bathroom scene -> kitchen
-            SceneManager.LoadScene(0);
+            // work scene -> kitchen
+            SceneManager.LoadScene(3);
         }
         else if (sceneID == 3)
         {
-            // work scene -> evening kitchen
+            // kitchen scene -> bedroom
             SceneManager.LoadScene(4);
         }
         else if (sceneID == 4)
         {
-            // evening kitchen -> bedroom
-            SceneManager.LoadScene(1);
+            // bedroom -> kitchen
+            SceneManager.LoadScene(0);
         }
 
     }

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using UnityEngine;
 using UnityEngine.UI;
 
-public class InteractableScript : MonoBehaviour
+public class InteractableBedroom : MonoBehaviour
 {
     public string instruction;
     public string instruction2;
@@ -14,6 +14,8 @@ public class InteractableScript : MonoBehaviour
     GameObject sleepText2;
     GameObject blackOutSprite;
     GameObject playerObject;
+
+    bool isInBed = false;
 
     // Start is called before the first frame update
     void Start()
@@ -30,42 +32,29 @@ public class InteractableScript : MonoBehaviour
         playerObject = GameObject.Find("Player");
     }
 
-    // Update is called once per frame
-    void Update()
+    private void Update()
     {
-        
-    }
-
-    void Instructions()
-    {
-        // if player enters trigger
-        // show text
+        if(isInBed == true)
+        {
+            if (Input.GetKeyDown(KeyCode.E))
+            {
+                StartCoroutine(Sleep());
+            }
+        }
     }
 
     private void OnTriggerEnter2D(Collider2D collision)
     {
         //print(instruction);
         UItext.text = instruction;
-
-        StartCoroutine(Sleep());
-
+        isInBed = true;
     }
 
-    private void OnTriggerStay2D(Collider2D collision)
-    {
-        
-
-        print(gameObject.name);
-        if (Input.GetKeyDown(KeyCode.E))
-        {
-            print(gameObject.name);
-
-        }
-    }
 
     private void OnTriggerExit2D(Collider2D collision)
     {
         UItext.text = emptyString;
+        isInBed = false;
     }
 
     IEnumerator Sleep()
@@ -88,15 +77,22 @@ public class InteractableScript : MonoBehaviour
         
         yield return new WaitForSeconds(2.0f);
         // show: press E to wake up
-        UItext.text = instruction2;
-        
-        //yield return null;
+        //UItext.text = instruction2;
+
+        WakeUp();
     }
 
     void WakeUp()
     {
+        //put the character next to bed
+        playerObject.transform.position = new Vector2(4.42f, playerObject.transform.position.y);
+        isInBed = false;
         // activate character
         playerObject.SetActive(true);
         sleepText1.SetActive(false);
+
+        // increment day counter
+        GameManager.DayCounter++;
+        print(" GameManager.DayCounter: " + GameManager.DayCounter);
     }
 }
